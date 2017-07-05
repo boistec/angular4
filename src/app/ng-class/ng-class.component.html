@@ -1,0 +1,13 @@
+<span class="glyphicon"
+  [class.glyphicon-star]="isSelectedByPropertyBinding"
+  [class.glyphicon-star-empty]="!isSelectedByPropertyBinding"
+(click)= "onClickPropBinding()">
+</span>
+
+<span class="glyphicon"
+  [ngClass]="{
+    'glyphicon-star':isSelectedByNgClass,
+    'glyphicon-star-empty':!isSelectedByNgClass
+  }"
+(click)= "onClickNgClass()">
+</span>

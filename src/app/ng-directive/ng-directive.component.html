@@ -1,0 +1,37 @@
+<div *ngIf="courses.length > 0; then coursesList else noCourses"></div>
+<ng-template #coursesList>
+  List of courses
+</ng-template>
+<ng-template #noCourses>
+  No courses yet
+</ng-template>
+
+
+<div [hidden]="courses.length == 0">
+  No hidden attribute
+</div>
+<div [hidden]="courses.length > 0">
+  Hidden courses
+</div>
+
+<ul class="nav nav-pills">
+  <li [class.active]="viewMode == 'map'"><a id="map" (click)="changeViewMode($event.target)">Map View</a></li>
+  <li [class.active]="viewMode == 'list'"><a id="list" (click)="changeViewMode($event.target)">List View</a></li>
+</ul>
+
+<div [ngSwitch]="viewMode">
+  <div *ngSwitchCase="'map'">Map View content</div>
+  <div *ngSwitchCase="'list'">List View content</div>
+  <div *ngSwitchDefault>Otherwise</div>
+</div>
+
+<button class="btn btn-primary" (click)="addItem()">Add</button>
+<button class="btn btn-primary" (click)="removeItem()">Remove</button>
+
+<button class="btn btn-primary" (click)="loadCourses()">Reset</button>
+
+<ul>
+  <li *ngFor="let jsoncours of jsoncourses, index as i, even as isEven; trackBy: trackCourse">
+    <span [class.evenrow]="isEven"> {{i}} - {{ jsoncours.name}} </span> 
+  </li>
+</ul>
