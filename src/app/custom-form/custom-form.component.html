@@ -1,3 +1,53 @@
-<p>
-  custom-form works!
-</p>
+<form #f="ngForm" (ngSubmit)="submit(f.value)" action="">
+  <div>
+    <label for="coursename"></label>
+    <input 
+      ngModel      
+      required
+      minlength="5"      
+      name="coursename" 
+      #coursename="ngModel"
+      id="coursename" 
+      type="text"
+      class="form-control">
+  </div>
+  <div *ngIf="!coursename.valid && coursename.touched" class="alert alert-danger">
+    <div *ngIf="coursename.errors.required">
+      You must provide the course name
+    </div>
+    <div *ngIf="coursename.errors.minlength">    
+      You must provide at least {{ coursename.errors.minlength.requiredLength }} caracters
+    </div>
+  </div>
+  <div>
+    <label></label>
+    <select 
+      required
+      ngModel 
+      name="category" 
+      #category="ngModel"
+      id="category"
+      class="form-control">
+      <option value=""></option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{category.name }}
+      </option>
+    </select>
+    <div *ngIf="category.touched && category.invalid" class="alert alert-danger">
+      You must provide the category      
+    </div>
+  </div>
+  <div>
+    <label for="warranty">
+      <input 
+      ngModel
+      #warranty="ngModel" 
+      name="warranty" 
+      id="warranty"
+      type="checkbox">
+      30-day money-back warranty
+    </label>
+  </div>
+  <p>{{f.value | json}}</p>
+  <button [disabled]="f.invalid" class="btn btn-primary">Create</button>
+</form>

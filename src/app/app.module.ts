@@ -1,7 +1,8 @@
+import { SignupFormComponent } from './signup-form/signup-form.component';
 import { AuthorsService } from './authors.service';
 import { CoursesService } from './courses.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { CoursesComponent } from 'app/components/courses/courses.component';
@@ -21,6 +22,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
 
 @NgModule({
   declarations: [
+    SignupFormComponent,
     AppComponent,
     CourseComponent,
     CoursesComponent,
@@ -35,9 +37,10 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     TraversaloperatorComponent,    
     CustomdirectiveDirective, ContactFormComponent, CustomFormComponent    
   ],
-  imports: [
+  imports: [    
     BrowserModule ,
-    FormsModule       
+    FormsModule,
+    ReactiveFormsModule  
   ],
   providers: [
     CoursesService,
