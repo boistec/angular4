@@ -1,4 +1,5 @@
 import { SignupFormComponent } from './signup-form/signup-form.component';
+import { HttpModule } from '@angular/http';
 import { AuthorsService } from './authors.service';
 import { CoursesService } from './courses.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,6 +20,8 @@ import { TraversaloperatorComponent } from './traversaloperator/traversaloperato
 import { CustomdirectiveDirective } from './customdirective.directive';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { PostsComponentComponent } from './posts-component/posts-component.component';
 
 @NgModule({
   declarations: [
@@ -35,12 +38,13 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
     NgStyleComponent,
     NgClassComponent,
     TraversaloperatorComponent,    
-    CustomdirectiveDirective, ContactFormComponent, CustomFormComponent    
+    CustomdirectiveDirective, ContactFormComponent, CustomFormComponent, ResetpasswordComponent, PostsComponentComponent    
   ],
   imports: [    
     BrowserModule ,
     FormsModule,
-    ReactiveFormsModule  
+    ReactiveFormsModule,
+    HttpModule    
   ],
   providers: [
     CoursesService,
