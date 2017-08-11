@@ -22,6 +22,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { PostsComponentComponent } from './posts-component/posts-component.component';
+import { PostService } from './services/postservice.service';
 
 @NgModule({
   declarations: [
@@ -47,8 +48,9 @@ import { PostsComponentComponent } from './posts-component/posts-component.compo
     HttpModule    
   ],
   providers: [
+    PostService,
     CoursesService,
-    AuthorsService    
+    AuthorsService        
     ],
   bootstrap: [AppComponent]
 })
