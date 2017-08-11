@@ -12,11 +12,7 @@ export class PostsComponentComponent implements OnInit {
   posts: any[];
   private url = 'http://jsonplaceholder.typicode.com/posts';  
 
-  constructor(private http: Http) {
-    http.get(this.url)
-    .subscribe(response => {
-      this.posts = response.json();
-    });    
+  constructor(private http: Http) {       
   }
 
   createPost(input: HTMLInputElement) {
@@ -49,8 +45,11 @@ export class PostsComponentComponent implements OnInit {
       });
   }
 
-
   ngOnInit() {
+    this.http.get(this.url)
+    .subscribe(response => {
+      this.posts = response.json();
+    }); 
   }
 
 }
