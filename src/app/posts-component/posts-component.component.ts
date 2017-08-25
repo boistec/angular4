@@ -18,7 +18,9 @@ export class PostsComponentComponent implements OnInit {
   }
 
   createPost(input: HTMLInputElement) {
-    let post =  {title: input.value};
+    let post =  {title: input.value};    
+    this.posts.splice(0, 0, post); //deleting in advance the element for sumulated improved performance. optimistic aproach
+
     input.value = '';
 
     this.service.create(post)
@@ -26,8 +28,10 @@ export class PostsComponentComponent implements OnInit {
         newPost => {
           post['id'] = newPost.id;
           this.posts.splice(0, 0, post); 
-          console.log(newPost.id);         
+          console.log(newPost.id);
         }, (error: AppError) => {
+          this.posts.splice(0, 1); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
+          
           if (error instanceof BadInput ) {
             //use this form with when you have a form and want
             //to show the error in the form.
@@ -50,12 +54,15 @@ export class PostsComponentComponent implements OnInit {
   }
 
   deletePost(post) {
-    this.service.delete(-600)
+    let index = this.posts.indexOf(post); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
+    this.posts.splice(index, 1); 
+
+    this.service.delete(post.id)
       .subscribe(
-        () => {
-          let index = this.posts.indexOf(post);
-          this.posts.splice(index,1);
-        }, (error: AppError) => {          
+        null, 
+        (error: AppError) => {
+          this.posts.splice(index, 0, post); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
+          
           if (error instanceof NotFundError) {            
             alert('This post has already been deleted.');
           } else {

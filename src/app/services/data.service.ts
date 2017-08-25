@@ -21,7 +21,7 @@ export class DataService {
         .catch(this.handlerError);
   }
 
-  create(resource) {
+  create(resource) {    
     return this.http.post(this.url, JSON.stringify(resource))
     .map(response => response.json())
     .catch(this.handlerError);
@@ -33,7 +33,7 @@ export class DataService {
     .catch(this.handlerError);
   }
 
-  delete(id) {
+  delete(id) {   
     return this.http.delete(this.url+ '/' + id)
     .map(response => response.json())
     .catch(this.handlerError);
@@ -41,7 +41,7 @@ export class DataService {
 
   private handlerError(error: Response) {
 
-    if (error.status === 404)
+    if (error.status === 400)
       return Observable.throw(new BadInput(error.json()));
 
     if (error.status === 404)    
