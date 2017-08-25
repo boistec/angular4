@@ -1,3 +1,5 @@
+import { ErrorHandler } from '@angular/core';
+import { AppErrorHandler } from './common/app-error-handler';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { HttpModule } from '@angular/http';
 import { AuthorsService } from './authors.service';
@@ -50,7 +52,8 @@ import { PostService } from './services/postservice.service';
   providers: [
     PostService,
     CoursesService,
-    AuthorsService        
+    AuthorsService,
+    { provide: ErrorHandler, useClass: AppErrorHandler} //This one is overwriting the ErrorHandler by angular
     ],
   bootstrap: [AppComponent]
 })
