@@ -25,9 +25,10 @@ export class PostsComponentComponent implements OnInit {
 
     this.service.create(post)
       .subscribe(
-        response => {
-          post['id'] = response.json().id;
-          console.log(response.json());
+        newPost => {
+          post['id'] = newPost.id;
+          this.posts.splice(0, 0, post); 
+          console.log(newPost.id);
         }, (error: AppError) => {
           this.posts.splice(0, 1); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
           
@@ -47,8 +48,8 @@ export class PostsComponentComponent implements OnInit {
     //this.http.patch(this.url, JSON.stringify(post))      
       this.service.update(post) 
       .subscribe(
-        response => {
-          console.log(response.json());
+        updatedPost => {
+          console.log(updatedPost);
         });
   }
 
@@ -61,11 +62,11 @@ export class PostsComponentComponent implements OnInit {
         null, 
         (error: AppError) => {
           this.posts.splice(index, 0, post); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
-
+          
           if (error instanceof NotFundError) {            
             alert('This post has already been deleted.');
           } else {
-            throw error //Re throw it to be make it available for the custom AppErrorHandler
+            throw error //Rethrow it to be make it available for the custom AppErrorHandler
           }          
       });
   }
