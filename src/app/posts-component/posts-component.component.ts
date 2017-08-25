@@ -23,10 +23,10 @@ export class PostsComponentComponent implements OnInit {
 
     this.service.create(post)
       .subscribe(
-        response => {
-          post['id'] = response.json().id;
-          this.posts.splice(0, 0, post);
-          console.log(response.json());
+        newPost => {
+          post['id'] = newPost.id;
+          this.posts.splice(0, 0, post); 
+          console.log(newPost.id);         
         }, (error: AppError) => {
           if (error instanceof BadInput ) {
             //use this form with when you have a form and want
@@ -44,22 +44,22 @@ export class PostsComponentComponent implements OnInit {
     //this.http.patch(this.url, JSON.stringify(post))      
       this.service.update(post) 
       .subscribe(
-        response => {
-          console.log(response.json());
+        updatedPost => {
+          console.log(updatedPost);
         });
   }
 
   deletePost(post) {
-    this.service.delete(post.id)
+    this.service.delete(-600)
       .subscribe(
-        response => {
+        () => {
           let index = this.posts.indexOf(post);
           this.posts.splice(index,1);
         }, (error: AppError) => {          
           if (error instanceof NotFundError) {            
             alert('This post has already been deleted.');
           } else {
-            throw error //Re throw it to be make it available for the custom AppErrorHandler
+            throw error //Rethrow it to be make it available for the custom AppErrorHandler
           }          
       });
   }

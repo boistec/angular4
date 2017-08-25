@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 //really specific module from reactive extensions 
 import { Observable } from 'rxjs/Rx';  //reactive extension
 import 'rxjs/add/operator/catch'; //reactive extension
+import 'rxjs/add/operator/throw'; //reactive extension
 import 'rxjs/add/operator/map'; //reactive extension
 
 @Injectable()
@@ -22,16 +23,19 @@ export class DataService {
 
   create(resource) {
     return this.http.post(this.url, JSON.stringify(resource))
+    .map(response => response.json())
     .catch(this.handlerError);
   }
 
   update(resource) {    
     return this.http.patch(this.url + '/' + resource.id, JSON.stringify(resource))
+    .map(response => response.json())
     .catch(this.handlerError);
   }
 
   delete(id) {
     return this.http.delete(this.url+ '/' + id)
+    .map(response => response.json())
     .catch(this.handlerError);
   }
 
