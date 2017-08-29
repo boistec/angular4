@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 //really specific module from reactive extensions 
 import { Observable } from 'rxjs/Rx';  //reactive extension
 import 'rxjs/add/operator/catch'; //reactive extension
+import 'rxjs/add/observable/throw'; //reactive extension
 import 'rxjs/add/operator/map'; //reactive extension
 
 @Injectable()
