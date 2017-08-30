@@ -7,8 +7,9 @@ import { Injectable } from '@angular/core';
 //really specific module from reactive extensions 
 import { Observable } from 'rxjs/Rx';  //reactive extension
 import 'rxjs/add/operator/catch'; //reactive extension
-import 'rxjs/add/operator/throw'; //reactive extension
 import 'rxjs/add/operator/map'; //reactive extension
+//import 'rxjs/add/operator/toPromise'; //se the commented line toPromise()
+import 'rxjs/add/observable/throw'; //reactive extension
 
 @Injectable()
 export class DataService {
@@ -36,6 +37,8 @@ export class DataService {
   delete(id) {   
     return this.http.delete(this.url+ '/' + id)
     .map(response => response.json())
+    //.toPromise()
+    .retry(3)
     .catch(this.handlerError);
   }
 

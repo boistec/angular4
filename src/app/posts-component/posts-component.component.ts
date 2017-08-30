@@ -57,7 +57,7 @@ export class PostsComponentComponent implements OnInit {
     let index = this.posts.indexOf(post); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
     this.posts.splice(index, 1); 
 
-    this.service.delete(post.id)
+    this.service.delete(post.id) //In order to make it a promise object remove the suscribe.    
       .subscribe(
         null, 
         (error: AppError) => {
@@ -68,7 +68,7 @@ export class PostsComponentComponent implements OnInit {
           } else {
             throw error //Rethrow it to be make it available for the custom AppErrorHandler
           }          
-      });
+      });      
   }
 
   ngOnInit() {

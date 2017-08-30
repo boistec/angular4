@@ -1,3 +1,4 @@
+import { FollowersService } from './services/followers.service';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './common/app-error-handler';
 import { SignupFormComponent } from './signup-form/signup-form.component';
@@ -25,6 +26,7 @@ import { CustomFormComponent } from './custom-form/custom-form.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { PostsComponentComponent } from './posts-component/posts-component.component';
 import { PostService } from './services/postservice.service';
+import { FollowersComponent } from './followers/followers.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,7 @@ import { PostService } from './services/postservice.service';
     NgStyleComponent,
     NgClassComponent,
     TraversaloperatorComponent,    
-    CustomdirectiveDirective, ContactFormComponent, CustomFormComponent, ResetpasswordComponent, PostsComponentComponent    
+    CustomdirectiveDirective, ContactFormComponent, CustomFormComponent, ResetpasswordComponent, PostsComponentComponent, FollowersComponent    
   ],
   imports: [    
     BrowserModule ,
@@ -53,8 +55,8 @@ import { PostService } from './services/postservice.service';
     PostService,
     CoursesService,
     AuthorsService,
-    { provide: ErrorHandler, useClass: AppErrorHandler} //This one is overwriting the ErrorHandler by angular
-    ],
+    { provide: ErrorHandler, useClass: AppErrorHandler}, //This one is overwriting the ErrorHandler by angular
+    FollowersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
