@@ -37,8 +37,8 @@ export class DataService {
   delete(id) {   
     return this.http.delete(this.url+ '/' + id)
     .map(response => response.json())
-    //.toPromise()
-    .retry(3)
+    //.toPromise() //if you want it to be eager instead of lazy
+    //.retry(3) // How many times would you like to try it?
     .catch(this.handlerError);
   }
 

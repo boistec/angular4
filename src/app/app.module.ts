@@ -1,5 +1,9 @@
+import { NavbarComponent } from './navbar/navbar.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { HomeComponent } from './home/home.component';
+import { FollowerProfileComponent } from './follower-profile/follower-profile.component';
 import { FollowersService } from './services/followers.service';
-import { ErrorHandler } from '@angular/core';
+import { ErrorHandler, Component } from '@angular/core';
 import { AppErrorHandler } from './common/app-error-handler';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 import { HttpModule } from '@angular/http';
@@ -27,6 +31,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
 import { PostsComponentComponent } from './posts-component/posts-component.component';
 import { PostService } from './services/postservice.service';
 import { FollowersComponent } from './followers/followers.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -43,13 +48,44 @@ import { FollowersComponent } from './followers/followers.component';
     NgStyleComponent,
     NgClassComponent,
     TraversaloperatorComponent,    
-    CustomdirectiveDirective, ContactFormComponent, CustomFormComponent, ResetpasswordComponent, PostsComponentComponent, FollowersComponent    
+    CustomdirectiveDirective, 
+    ContactFormComponent, 
+    CustomFormComponent, 
+    ResetpasswordComponent, 
+    PostsComponentComponent, 
+    FollowersComponent,
+    FollowerProfileComponent,
+    HomeComponent,
+    NotFoundComponent,
+    NavbarComponent
   ],
   imports: [    
     BrowserModule ,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule    
+    HttpModule,
+    RouterModule.forRoot([
+      {
+        path: '', 
+        component: HomeComponent 
+      },
+      {
+        path: 'followers/:id/:username', 
+        component: FollowerProfileComponent 
+      },      
+      {
+        path: 'followers', 
+        component: FollowersComponent 
+      },
+      {
+        path: 'posts', 
+        component: PostsComponentComponent 
+      },
+      {
+        path: '**', 
+        component: NotFoundComponent 
+      }
+    ])   
   ],
   providers: [
     PostService,

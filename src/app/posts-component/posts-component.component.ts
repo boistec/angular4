@@ -19,7 +19,7 @@ export class PostsComponentComponent implements OnInit {
 
   createPost(input: HTMLInputElement) {
     let post =  {title: input.value};    
-    this.posts.splice(0, 0, post); //deleting in advance the element for sumulated improved performance. optimistic aproach
+    this.posts.splice(0, 0, post); //added in advance the element for sumulated improved performance. optimistic aproach
 
     input.value = '';
 
@@ -27,7 +27,7 @@ export class PostsComponentComponent implements OnInit {
       .subscribe(
         newPost => {
           post['id'] = newPost.id;
-          this.posts.splice(0, 0, post); 
+          //this.posts.splice(0, 0, post); 
           console.log(newPost.id);
         }, (error: AppError) => {
           this.posts.splice(0, 1); //Hence we added the optimistic aproach we have to make sure to undo the change on error          
