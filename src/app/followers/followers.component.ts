@@ -3,6 +3,8 @@ import { FollowersService } from './../services/followers.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-followers',
@@ -24,12 +26,16 @@ export class FollowersComponent implements OnInit {
       this.route.paramMap, //to get the required parameters
       this.route.queryParamMap //to get the optionals parameters
     ])
-    .subscribe(combined => {
+    .switchMap(combined => {
+
       let id = combined[0].get('id');
       let id2 = combined[1].get('page');
 
-      this.followers.getAll()
-      .subscribe(response => this.data = response);      
+      return this.followers.getAll();     
+
+    })
+    .subscribe(followers => {
+      this.data = followers;
     });
   }
 }

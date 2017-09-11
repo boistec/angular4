@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,18 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FollowerProfileComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(
+    private routeActivated: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit() {
         
     //the activatedRoute is an observable to consider an scenario when you are in the same page and have to move forward for example in a grid.
-    this.route.paramMap    
+    this.routeActivated.paramMap    
     .subscribe(params => {
       let id = +params.get('id')
       console.log(id);
     });
     
     console.log("FollowerProfileComponent onInit");    
+  }
+
+  submit() {
+    this.router.navigate(['/followers'] ,{
+      queryParams: { page: 1, order: 'newest'}
+    });
   }
 
 }

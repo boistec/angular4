@@ -32,6 +32,7 @@ import { PostsComponentComponent } from './posts-component/posts-component.compo
 import { PostService } from './services/postservice.service';
 import { FollowersComponent } from './followers/followers.component';
 import { RouterModule } from '@angular/router';
+import { OthersComponent } from './others/others.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { RouterModule } from '@angular/router';
     FollowerProfileComponent,
     HomeComponent,
     NotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    OthersComponent
   ],
   imports: [    
     BrowserModule ,
@@ -76,6 +78,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'followers', 
         component: FollowersComponent 
+      },
+      {
+        path: 'others', 
+        component: OthersComponent 
       },
       {
         path: 'posts', 
